@@ -35,7 +35,7 @@ def write_to_rds(**kwargs):
     cur.execute(
         query='''
             INSERT INTO `tbl_saleinfo`
-            ( `from`, `subject`, `content`, `sale`, `view`, `like`, `regdate`)
+            ( `from`, `subject`, `content`, `saleflag`, `view`, `like`, `regdate`)
             VALUES
             ( %(fromstore)s, %(subject)s, %(content)s, %(sale)s, 0, 0, NOW());
         ''',
@@ -60,7 +60,7 @@ mails_id_list = mails_ids.split()
 mail_count = 40
 for i in reversed(mails_id_list):
 
-    result, mail_data = imap.fetch(i, "(RFC822)")
+    result, mail_data = imap.uid('fetch', i , '(RFC822)')    
     raw_email = mail_data[0][1]
     raw_email_string = raw_email.decode('utf-8')
     email_message = email.message_from_string(raw_email_string)
