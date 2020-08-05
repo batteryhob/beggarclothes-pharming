@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: pharming-1
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: pharming-1
+        spec:
+          containers:
+          - name: pharming-1
+            image: batteryho/pharming:0.1
+            # args: ["--mode", "1" ]
+          restartPolicy: OnFailure
