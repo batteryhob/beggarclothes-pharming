@@ -3,7 +3,7 @@ kind: CronJob
 metadata:
   name: pharming-1
 spec:
-  schedule: "*/30 * * * *"
+  schedule: "*/5 * * * *"
   jobTemplate:
     spec:
       template:
@@ -13,6 +13,8 @@ spec:
         spec:
           containers:
           - name: pharming-1
-            image: batteryho/pharming:0.1
-            # args: ["--mode", "1" ]
-          restartPolicy: OnFailure
+            image: batteryho/pharming:v0.3
+            imagePullPolicy: IfNotPresent
+            ports:
+            - containerPort: 8100
+          restartPolicy: Never
