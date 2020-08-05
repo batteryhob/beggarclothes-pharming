@@ -90,6 +90,10 @@ for i in reversed(mails_id_list):
     sale = 0
     if "SALE" in  subject.upper():
         sale = 1
+    elif "UP TO" in  subject.upper():
+        sale = 1
+    elif "%" in  subject.upper():
+        sale = 1
     else:
         sale = 0
 
